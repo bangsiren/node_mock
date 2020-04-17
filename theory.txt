@@ -1,0 +1,53 @@
+(1) Buffers is a class in nodejs that help in storing raw data in an array of integers.
+
+(2) How to copy a buffer to another. if we have two buffers say buffer1 equal to new Buffer(ABC)
+    and buffer2 equal new Bufferr(3) if we want buffer2 to return ABC we can copy it using buffer1.copy(buffer2) 
+    and we now console.log(buffer2.toString());
+
+(3) modules in nodejs are  simple or complex functionalities organized in single or multiple 
+    JavaScript files which can be re-used throughout the node. js application.
+
+(4) Streams in node js are data handling method that are use to read and write input into output sequentially.
+
+(5) The different between Synchronous method and Asynchronous method in node js is that, an Asynchronous method wait for each 
+    operation or thread to complete before it can continue to execite another thread or operation while a Synchronous
+    method does not wait for any operation to complete before it continue it works continuously.
+
+(6) fs.open()  is a Synchronous method.
+
+(7) The different between duplex , writable and readable streams in node js
+    a readable stream is use to read files, writable streams are use to write files
+    while a duplex strean can be use in writing and reading files.
+
+(8) Four events commonly fired when using stream are data event, error event end event and finish event
+
+(9) To coonect one stream to another we can use use pipes . Exanple
+    we first import the file system
+    var fs = require('fs);
+
+    var readStreams = fs.createReadStream('read.txt', 'utf8');
+    var writeStream = fs.createWiteStream('write.txt')
+    readStreams.on('data', (chunck)=>{
+        console.log(writeStream) this copies the text in the read.txt file into the write.txt file
+    })
+    // utf8 convert the buffer
+    we can still pipe like this   readStreams.pipe(writeStream);
+
+(10) How to open a file for writing
+   const fs = require('fs');
+
+let path = 'write.txt';
+let buffer = new Buffer('Writing my node mock test');
+
+fs.open(path, 'w', function(err, fd) {
+    if (err) {
+        throw 'could not open file: ' + err;
+    }
+
+    fs.write(fd, buffer, 0, buffer.length, null, function(err) {
+        if (err) throw 'error writing file: ' + err;
+        fs.close(fd, function() {
+            console.log('File Successfully written');
+        });
+    });
+});
